@@ -1012,6 +1012,7 @@ E void FDECL(strbuf_append, (strbuf_t *, const char *));
 E void FDECL(strbuf_reserve, (strbuf_t *, int));
 E void FDECL(strbuf_empty, (strbuf_t *));
 E void FDECL(strbuf_nl_to_crlf, (strbuf_t *));
+E unsigned int FDECL(tnnt_coord_hash, (int, int, int)); 
 
 /* ### invent.c ### */
 
