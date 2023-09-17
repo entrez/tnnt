@@ -115,7 +115,7 @@ unsigned mgflags;
         explode_color(offset / MAXEXPCHARS);
     } else if ((offset = (glyph - GLYPH_CMAP_OFF)) >= 0) { /* cmap */
         idx = offset + SYM_OFF_P;
-        if (is_cmap_wall(idx)) {
+        if (is_cmap_wall(idx) && Is_rfk_level(&u.uz)) {
             unsigned int hash = tnnt_coord_hash(x, y, 0);
             idx = (hash % (VENOM_CLASS - 2)) + SYM_OFF_O + 1;
             color = hash % CLR_MAX;

@@ -731,6 +731,7 @@ int mode;
     int y = uy + dy;
     register struct rm *tmpr = &levl[x][y];
     register struct rm *ust;
+    struct obj *otmp;
 
     context.door_opened = FALSE;
     /*
@@ -776,13 +777,17 @@ int mode;
                     pline("That drawbridge is up!");
                 /* sokoban restriction stays even after puzzle is solved */
                 else if (Passes_walls && !may_passwall(x, y)
-                         && In_sokoban(&u.uz))
+                         && In_sokoban(&u.uz)) {
                     pline_The("Sokoban walls resist your ability.");
-                else if (iflags.mention_walls)
+                } else if (IS_WALL(tmpr->typ) && Is_rfk_level(&u.uz)) {
+                    char buf[BUFSZ];
+                    pline1(tnnt_get_nki_text(buf, x, y));
+                } else if (iflags.mention_walls) {
                     pline("It's %s.",
                           (IS_WALL(tmpr->typ) || tmpr->typ == SDOOR) ? "a wall"
                           : IS_TREE(tmpr->typ) ? "a tree"
                           : "solid stone");
+                }
             }
             return FALSE;
         }

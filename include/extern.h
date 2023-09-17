@@ -2247,6 +2247,7 @@ E void FDECL(save_oracles, (int, int));
 E void FDECL(restore_oracles, (int));
 E int FDECL(doconsult, (struct monst *));
 E void NDECL(rumor_check);
+E char *FDECL(tnnt_get_nki_text, (char *, XCHAR_P, XCHAR_P));
 
 /* ### save.c ### */
 
