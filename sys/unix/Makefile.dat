@@ -9,7 +9,7 @@ NHSROOT=..
 # SHELL=E:/GEMINI2/MUPFEL.TTP
 # UUDECODE=uudecode
 
-VARDAT = bogusmon data engrave epitaph rumors quest.dat oracles options
+VARDAT = bogusmon data engrave epitaph nki rumors quest.dat oracles options
 
 all:	$(VARDAT) spec_levs quest_levs dungeon
 
@@ -113,6 +113,9 @@ oracles:	oracles.txt ../util/makedefs
 	../util/makedefs -h
 
 engrave:	engrave.txt ../util/makedefs
+	../util/makedefs -s
+
+nki:	nki.txt ../util/makedefs
 	../util/makedefs -s
 
 epitaph:	epitaph.txt ../util/makedefs

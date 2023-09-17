@@ -57,7 +57,7 @@ DIRPERM  = 0755
 # for Gnome
 # VARDATND = x11tiles pet_mark.xbm pilemark.xbm rip.xpm mapbg.xpm
 
-VARDATD = bogusmon data engrave epitaph oracles options quest.dat rumors
+VARDATD = bogusmon data engrave epitaph nki oracles options quest.dat rumors
 VARDAT = $(VARDATD) $(VARDATND)
 
 # Some versions of make use the SHELL environment variable as the shell
@@ -121,6 +121,10 @@ bogusmon: $(GAME)
 
 epitaph: $(GAME)
 	( cd dat ; $(MAKE) epitaph )
+
+# TNNT: nki file
+nki: $(GAME)
+	( cd dat ; $(MAKE) nki )
 
 rumors: $(GAME)
 	( cd dat ; $(MAKE) rumors )
