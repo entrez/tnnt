@@ -1406,6 +1406,7 @@ long flag;
             /* KMH -- Added iron bars */
             if (ntyp == IRONBARS
                 && (!(flag & ALLOW_BARS)
+                    || Is_rfk_level(&u.uz) /* TNNT */
                     || ((levl[nx][ny].wall_info & W_NONDIGGABLE)
                         && (dmgtype(mdat, AD_RUST)
                             || dmgtype(mdat, AD_CORR)))))

@@ -664,6 +664,8 @@ boolean
 may_passwall(x, y)
 register xchar x, y;
 {
+    if (levl[x][y].typ == IRONBARS && Is_rfk_level(&u.uz))
+        return FALSE;
     return (boolean) !(IS_STWALL(levl[x][y].typ)
                        && (levl[x][y].wall_info & W_NONPASSWALL));
 }
@@ -751,6 +753,11 @@ int mode;
                 pline("There is an obstacle there.");
             return FALSE;
         } else if (tmpr->typ == IRONBARS) {
+            if (Is_rfk_level(&u.uz)) {
+                char buf[BUFSZ];
+                pline1(tnnt_get_nki_text(buf, x, y));
+                return FALSE;
+            }
             if ((dmgtype(youmonst.data, AD_RUST)
                  || dmgtype(youmonst.data, AD_CORR)) && mode == DO_MOVE
                 && still_chewing(x, y)) {
@@ -779,9 +786,6 @@ int mode;
                 else if (Passes_walls && !may_passwall(x, y)
                          && In_sokoban(&u.uz)) {
                     pline_The("Sokoban walls resist your ability.");
-                } else if (IS_WALL(tmpr->typ) && Is_rfk_level(&u.uz)) {
-                    char buf[BUFSZ];
-                    pline1(tnnt_get_nki_text(buf, x, y));
                 } else if (iflags.mention_walls) {
                     pline("It's %s.",
                           (IS_WALL(tmpr->typ) || tmpr->typ == SDOOR) ? "a wall"

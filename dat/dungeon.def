@@ -26,6 +26,7 @@ RNDLEVEL:	"bigrm" "B" @ (10, 3) 40 10
 CHAINBRANCH:	"The Quest" "oracle" + (6, 2) portal
 BRANCH:		"Fort Ludios" @ (18, 4) portal
 CHAINBRANCH:    "DevTeam Office" "rogue" + (0, 0) up
+CHAINBRANCH:    "robotfindskitten" "rogue" + (2, 5) portal
 RNDLEVEL:	"medusa" "none" @ (-5, 4) 4
 LEVALIGN:	chaotic
 CHAINBRANCH:    "Deathmatch Arena" "medusa" + (-1, 0) portal
@@ -124,6 +125,13 @@ DUNGEON:        "Deathmatch Arena" "Y" (1, 0)
 DESCRIPTION:    mazelike
 ALIGNMENT:      unaligned
 LEVEL:          "npcdeath" "Y" @ (1, 0)
+#
+#       robotfindskitten
+#
+DUNGEON:        "robotfindskitten" "W" (1, 0)
+DESCRIPTION:    mazelike
+ALIGNMENT:      unaligned
+LEVEL:          "robotfindskitn" "W" @ (1, 0)
 #
 #	Vlad's Tower
 #

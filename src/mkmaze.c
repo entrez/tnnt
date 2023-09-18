@@ -25,6 +25,7 @@ STATIC_DCL boolean FDECL(put_lregion_here, (XCHAR_P, XCHAR_P, XCHAR_P,
 STATIC_DCL void NDECL(baalz_fixup);
 STATIC_DCL void NDECL(setup_waterlevel);
 STATIC_DCL void NDECL(unsetup_waterlevel);
+STATIC_DCL void NDECL(tnnt_setup_rfk_level);
 STATIC_DCL void FDECL(check_ransacked, (char *));
 STATIC_DCL void FDECL(migr_booty_item, (int, const char *));
 STATIC_DCL void FDECL(migrate_orc, (struct monst *, unsigned long));
@@ -475,6 +476,8 @@ fixup_special()
         /* water level is an odd beast - it has to be set up
            before calling place_lregions etc. */
         setup_waterlevel();
+    } else if (Is_rfk_level(&u.uz)) {
+        tnnt_setup_rfk_level();
     }
     for (x = 0; x < num_lregions; x++, r++) {
         switch (r->rtype) {
@@ -1736,6 +1739,25 @@ unsetup_waterlevel()
         free((genericptr_t) b);
     }
     bbubbles = ebubbles = (struct bubble *) 0;
+}
+
+STATIC_OVL void
+tnnt_setup_rfk_level()
+{
+#define NUM_NKI 70
+    int i;
+    for (i = 0; i < NUM_NKI; i++) {
+        int tryct;
+        xchar x, y;
+        for (tryct = rnd(4); tryct; tryct--) {
+            x = rn2(COLNO);
+            y = rn2(ROWNO);
+            if (goodpos(x, y, (struct monst *) 0, 0)) {
+                levl[x][y].typ = IRONBARS;
+                break;
+            }
+        }
+    }
 }
 
 STATIC_OVL void
