@@ -763,7 +763,6 @@ int mode;
     int y = uy + dy;
     register struct rm *tmpr = &levl[x][y];
     register struct rm *ust;
-    struct obj *otmp;
 
     context.door_opened = FALSE;
     /*
