@@ -731,6 +731,9 @@ int x, y;
     if (x == tnnt_globals.kitten_loc.x && y == tnnt_globals.kitten_loc.y) {
         struct monst *kitten;
 
+        if (tnnt_is_achieved(A_FOUND_KITTEN))
+            impossible("found more than one kitten?");
+
         pline("You found kitten!  Way to go!");
         tnnt_globals.kitten_loc.x = tnnt_globals.kitten_loc.y = 0;
         levl[x][y].typ = ROOM;
