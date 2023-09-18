@@ -1745,12 +1745,21 @@ STATIC_OVL void
 tnnt_setup_rfk_level()
 {
 #define NUM_NKI 70
-    int i;
+    xchar x, y;
+    int i, tryct;
+    /* place kitten */
+    tryct = 50;
+    do {
+        tnnt_globals.kitten_loc.x = x = rnd(COLNO - 1);
+        tnnt_globals.kitten_loc.y = y = rn2(ROWNO);
+    } while (!goodpos(x, y, (struct monst *) 0, 0) && --tryct > 0);
+    levl[x][y].typ = IRONBARS;
+
+    /* place Non-Kitten Items */
     for (i = 0; i < NUM_NKI; i++) {
         int tryct;
-        xchar x, y;
         for (tryct = rnd(4); tryct; tryct--) {
-            x = rn2(COLNO);
+            x = rnd(COLNO - 1);
             y = rn2(ROWNO);
             if (goodpos(x, y, (struct monst *) 0, 0)) {
                 levl[x][y].typ = IRONBARS;

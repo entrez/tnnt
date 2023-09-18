@@ -721,6 +721,33 @@ xchar x, y;
                       && x == inv_pos.x && y == inv_pos.y);
 }
 
+void
+tnnt_rfk_move(x, y)
+int x, y;
+{
+    if (!Is_rfk_level(&u.uz))
+        return;
+
+    if (x == tnnt_globals.kitten_loc.x && y == tnnt_globals.kitten_loc.y) {
+        struct monst *kitten;
+
+        pline("You found kitten!  Way to go!");
+        tnnt_globals.kitten_loc.x = tnnt_globals.kitten_loc.y = 0;
+        levl[x][y].typ = ROOM;
+        kitten = makemon(&mons[PM_KITTEN], x, y, MM_NOGRP);
+        if (u.uconduct.pets) {
+            tamedog(kitten, (struct obj *) 0);
+        } else {
+            kitten->mpeaceful = 1;
+            set_malign(kitten);
+        }
+        tnnt_achieve(A_FOUND_KITTEN);
+    } else {
+        char buf[BUFSZ];
+        pline1(tnnt_get_nki_text(buf, x, y));
+    }
+}
+
 /* return TRUE if (dx,dy) is an OK place to move
  * mode is one of DO_MOVE, TEST_MOVE, TEST_TRAV, or TEST_TRAP
  */
@@ -754,8 +781,7 @@ int mode;
             return FALSE;
         } else if (tmpr->typ == IRONBARS) {
             if (Is_rfk_level(&u.uz)) {
-                char buf[BUFSZ];
-                pline1(tnnt_get_nki_text(buf, x, y));
+                tnnt_rfk_move(x, y);
                 return FALSE;
             }
             if ((dmgtype(youmonst.data, AD_RUST)
