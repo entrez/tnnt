@@ -781,7 +781,8 @@ int mode;
             return FALSE;
         } else if (tmpr->typ == IRONBARS) {
             if (Is_rfk_level(&u.uz)) {
-                tnnt_rfk_move(x, y);
+                if (mode == DO_MOVE)
+                    tnnt_rfk_move(x, y);
                 return FALSE;
             }
             if ((dmgtype(youmonst.data, AD_RUST)
