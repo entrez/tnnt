@@ -618,6 +618,10 @@ int x, y;
             return FALSE;
         }
         if (levl[x][y].typ == IRONBARS) {
+            if (Is_rfk_level(&u.uz)) {
+                You("Stop moving.");
+                return FALSE;
+            }
             You("crash into some iron bars.  Ouch!");
             dmg = rnd(2 + *range);
             losehp(Maybe_Half_Phys(dmg), "crashing into iron bars",

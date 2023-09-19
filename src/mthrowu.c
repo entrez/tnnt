@@ -478,10 +478,12 @@ boolean verbose;    /* give message(s) even when you can't see what happened */
      /* the random chance for small objects hitting bars is */          \
      /* skipped when reaching them at point blank range */              \
      || (levl[bhitpos.x + dx][bhitpos.y + dy].typ == IRONBARS           \
-         && hits_bars(&singleobj,                                       \
-                      bhitpos.x, bhitpos.y,                             \
-                      bhitpos.x + dx, bhitpos.y + dy,                   \
-                      ((pre) ? 0 : !rn2(5)), 0))                        \
+         /* TNNT: objects can go over NKI/kitten */                     \
+         && (Is_rfk_level(&u.uz)                                        \
+             || hits_bars(&singleobj,                                   \
+                          bhitpos.x, bhitpos.y,                         \
+                          bhitpos.x + dx, bhitpos.y + dy,               \
+                          ((pre) ? 0 : !rn2(5)), 0)))                   \
      /* Thrown objects "sink" */                                        \
      || (!(pre) && IS_SINK(levl[bhitpos.x][bhitpos.y].typ)))
 
